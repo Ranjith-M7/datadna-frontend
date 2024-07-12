@@ -702,10 +702,10 @@ h6 {
 --------------------------------------------------------------*/
 .scroll-top {
   position: fixed;
-  visibility: hidden;
-  opacity: 0;
   right: 15px;
   bottom: 15px;
+  visibility: hidden;
+  opacity: 0;
   z-index: 99999;
   background-color: var(--accent-color);
   width: 40px;
@@ -981,6 +981,7 @@ section,
   border-radius: 4px;
   transition: 0.5s;
   box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
 }
 
 .about .content .btn-read-more span {

@@ -3,6 +3,8 @@ import React from "react";
 function About() {
   return (
     <>
+
+
       {/* About Section */}
       <section id="about" className="about section">
         <div className="container" data-aos="fade-up">

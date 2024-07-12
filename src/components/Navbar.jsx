@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -7,11 +8,11 @@ function Navbar() {
       <div className="container-fluid" id="nav">
         <div className="container">
           <nav className="navbar navbar-dark navbar-expand-lg py-0">
-            <a href="index.html" className="navbar-brand">
+            <NavLink to="/" className="navbar-brand">
               <h1 className="text-white fw-bold d-block title">
                 High<span className="text-secondary-color">Tech</span>
               </h1>
-            </a>
+            </NavLink>
             <button
               type="button"
               className="navbar-toggler me-0"
@@ -25,47 +26,65 @@ function Navbar() {
               id="navbarCollapse"
             >
               <div className="navbar-nav ms-auto mx-xl-auto p-0">
-                <a
-                  href="index.html"
-                  className="nav-item nav-link active text-green"
+                <NavLink
+                  to="/"
+                  exact
+                  activeClassName="active"
+                  className="nav-item nav-link text-green"
                 >
                   Home
-                </a>
-                <a href="about.html" className="nav-item nav-link">
-                  About
-                </a>
-                <a href="service.html" className="nav-item nav-link">
+                </NavLink>
+                <NavLink
+                  to="/about"
+                  activeClassName="active"
+                  className="nav-item nav-link"
+                >
+                  About Us
+                </NavLink>
+                <NavLink
+                  to="/services"
+                  activeClassName="active"
+                  className="nav-item nav-link"
+                >
                   Services
-                </a>
-                <a href="project.html" className="nav-item nav-link">
+                </NavLink>
+                <NavLink
+                  to="/project"
+                  activeClassName="active"
+                  className="nav-item nav-link"
+                >
                   Projects
-                </a>
+                </NavLink>
                 <div className="nav-item dropdown">
-                  <a
-                    href="#"
+                  <NavLink
+                    to="#"
                     className="nav-link dropdown-toggle"
                     data-bs-toggle="dropdown"
                   >
                     Pages
-                  </a>
+                  </NavLink>
                   <div className="dropdown-menu rounded">
-                    <a href="blog.html" className="dropdown-item">
+                    <NavLink to="/blog" className="dropdown-item">
                       Our Blog
-                    </a>
-                    <a href="team.html" className="dropdown-item">
+                    </NavLink>
+                    <NavLink to="/team" className="dropdown-item">
                       Our Team
-                    </a>
-                    <a href="testimonial.html" className="dropdown-item">
+                    </NavLink>
+                    <NavLink to="/testimonial" className="dropdown-item">
                       Testimonial
-                    </a>
-                    <a href="404.html" className="dropdown-item">
+                    </NavLink>
+                    <NavLink to="/404" className="dropdown-item">
                       404 Page
-                    </a>
+                    </NavLink>
                   </div>
                 </div>
-                <a href="contact.html" className="nav-item nav-link">
+                <NavLink
+                  to="/contact"
+                  activeClassName="active"
+                  className="nav-item nav-link"
+                >
                   Contact
-                </a>
+                </NavLink>
               </div>
             </div>
             <div className="d-none d-xl-flex flex-shirink-0">
@@ -73,7 +92,7 @@ function Navbar() {
                 id="phone-tada"
                 className="d-flex align-items-center justify-content-center me-4"
               >
-                <a href="" className="position-relative animated tada infinite">
+                <NavLink to="#" className="position-relative animated tada infinite">
                   <i
                     className="fa fa-phone-alt text-white fa-2x"
                     style={{ transform: "rotate(90deg)" }}
@@ -86,7 +105,7 @@ function Navbar() {
                       <i className="fa fa-comment-dots text-secondary-color" />
                     </span>
                   </div>
-                </a>
+                </NavLink>
               </div>
               <div className="d-flex flex-column pe-4 border-end">
                 <span className="text-white-50">Have any questions?</span>
@@ -95,9 +114,9 @@ function Navbar() {
                 </span>
               </div>
               <div className="d-flex align-items-center justify-content-center ms-4 ">
-                <a href="#">
+                <NavLink to="#">
                   <i className="fa-solid fa-magnifying-glass text-white fa-2x"></i>
-                </a>
+                </NavLink>
               </div>
             </div>
           </nav>

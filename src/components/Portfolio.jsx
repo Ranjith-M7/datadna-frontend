@@ -1,6 +1,57 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Isotope from "isotope-layout";
+import imagesLoaded from "imagesloaded";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import "isotope-layout/dist/isotope.pkgd.min.js";
+import "glightbox/dist/css/glightbox.min.css";
+import GLightbox from "glightbox";
 
 function Portfolio() {
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: true });
+    const lightbox = GLightbox({
+      selector: ".glightbox",
+    });
+
+    const isotopeLayouts = document.querySelectorAll(".isotope-layout");
+    isotopeLayouts.forEach((isotopeItem) => {
+      let layout = isotopeItem.getAttribute("data-layout") ?? "masonry";
+      let filter = isotopeItem.getAttribute("data-default-filter") ?? "*";
+      let sort = isotopeItem.getAttribute("data-sort") ?? "original-order";
+
+      let initIsotope;
+      imagesLoaded(isotopeItem.querySelector(".isotope-container"), () => {
+        initIsotope = new Isotope(
+          isotopeItem.querySelector(".isotope-container"),
+          {
+            itemSelector: ".isotope-item",
+            layoutMode: layout,
+            filter: filter,
+            sortBy: sort,
+          }
+        );
+      });
+
+      isotopeItem
+        .querySelectorAll(".isotope-filters li")
+        .forEach((filterElement) => {
+          filterElement.addEventListener("click", function () {
+            isotopeItem
+              .querySelector(".isotope-filters .filter-active")
+              .classList.remove("filter-active");
+            this.classList.add("filter-active");
+            initIsotope.arrange({
+              filter: this.getAttribute("data-filter"),
+            });
+            if (typeof AOS.refresh === "function") {
+              AOS.refresh();
+            }
+          });
+        });
+    });
+  }, []);
+
   return (
     <>
       {/* Portfolio Section */}
