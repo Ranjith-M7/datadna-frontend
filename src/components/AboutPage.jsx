@@ -12,7 +12,7 @@ function AboutPage() {
     <>
       <Topbar />
       <Navbar />
-      <PageHeader pageTitle={pageTitle} />
+      {/* <PageHeader pageTitle={pageTitle} /> */}
       <About />
       <Footer />
       <ScrollTop />

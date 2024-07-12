@@ -12,6 +12,8 @@ import "glightbox/dist/css/glightbox.min.css";
 import imagesLoaded from "imagesloaded";
 import Isotope from "isotope-layout";
 import Swiper, { Navigation, Pagination } from "swiper";
+import ProjectsPage from "./components/ProjectsPage";
+import ContactPage from "./components/ContactPage";
 
 function App() {
   useEffect(() => {
@@ -54,7 +56,9 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
-          <Route path="*" element={<ErrorPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="*" element={<HomePage />} />
         </Routes>
       </BrowserRouter>
     </>

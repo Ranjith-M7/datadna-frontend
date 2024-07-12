@@ -2,22 +2,22 @@ import React from "react";
 import Topbar from "./Topbar";
 import Navbar from "./Navbar";
 import PageHeader from "./PageHeader";
-import Services from "./Services";
+import Projects from "./Projects";
 import Footer from "./Footer";
 import ScrollTop from "./ScrollTop";
 
-function ServicesPage() {
-  const pageTitle = "Services";
+function ProjectsPage() {
+  const pageTitle = "Projects";
   return (
     <>
       <Topbar />
       <Navbar />
       {/* <PageHeader pageTitle={pageTitle} /> */}
-      <Services />
+      <Projects />
       <Footer />
       <ScrollTop />
     </>
   );
 }
 
-export default ServicesPage;
+export default ProjectsPage;

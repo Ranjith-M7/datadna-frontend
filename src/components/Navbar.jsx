@@ -10,7 +10,7 @@ function Navbar() {
           <nav className="navbar navbar-dark navbar-expand-lg py-0">
             <NavLink to="/" className="navbar-brand">
               <h1 className="text-white fw-bold d-block title">
-                High<span className="text-secondary-color">Tech</span>
+                Data<span className="text-secondary-color">DNA</span>
               </h1>
             </NavLink>
             <button
@@ -29,40 +29,40 @@ function Navbar() {
                 <NavLink
                   to="/"
                   exact
-                  activeClassName="active"
+                  activeclassname="active"
                   className="nav-item nav-link text-green"
                 >
                   Home
                 </NavLink>
                 <NavLink
                   to="/about"
-                  activeClassName="active"
+                  activeclassname="active"
                   className="nav-item nav-link"
                 >
                   About Us
                 </NavLink>
                 <NavLink
                   to="/services"
-                  activeClassName="active"
+                  activeclassname="active"
                   className="nav-item nav-link"
                 >
                   Services
                 </NavLink>
                 <NavLink
-                  to="/project"
-                  activeClassName="active"
+                  to="/projects"
+                  activeclassname="active"
                   className="nav-item nav-link"
                 >
                   Projects
                 </NavLink>
                 <div className="nav-item dropdown">
-                  <NavLink
+                  <a
                     to="#"
                     className="nav-link dropdown-toggle"
                     data-bs-toggle="dropdown"
                   >
                     Pages
-                  </NavLink>
+                  </a>
                   <div className="dropdown-menu rounded">
                     <NavLink to="/blog" className="dropdown-item">
                       Our Blog
@@ -80,7 +80,7 @@ function Navbar() {
                 </div>
                 <NavLink
                   to="/contact"
-                  activeClassName="active"
+                  activeclassname="active"
                   className="nav-item nav-link"
                 >
                   Contact
@@ -92,7 +92,10 @@ function Navbar() {
                 id="phone-tada"
                 className="d-flex align-items-center justify-content-center me-4"
               >
-                <NavLink to="#" className="position-relative animated tada infinite">
+                <NavLink
+                  to="#"
+                  className="position-relative animated tada infinite"
+                >
                   <i
                     className="fa fa-phone-alt text-white fa-2x"
                     style={{ transform: "rotate(90deg)" }}

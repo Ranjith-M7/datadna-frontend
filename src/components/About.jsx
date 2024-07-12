@@ -3,10 +3,15 @@ import React from "react";
 function About() {
   return (
     <>
-
-
       {/* About Section */}
       <section id="about" className="about section">
+        {/* Section Title */}
+        <div className="container section-title" data-aos="fade-up">
+          <h2>About</h2>
+          <p>Check Our Services</p>
+        </div>
+        {/* End Section Title */}
+
         <div className="container" data-aos="fade-up">
           <div className="row gx-0">
             <div

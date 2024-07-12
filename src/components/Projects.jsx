@@ -13,8 +13,8 @@ function Projects() {
       <div className="container-fluid project py-5 mb-5">
         {/* Section Title */}
         <div className="container section-title" data-aos="fade-up">
-          <h2>Portfolio</h2>
-          <p>Check our latest work</p>
+          <h2>Our Project</h2>
+          <p>Our Recently Completed Projects</p>
         </div>
         <div className="container">
           <div className="row g-5">
