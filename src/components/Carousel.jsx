@@ -2,25 +2,25 @@ import React from "react";
 import img1 from "../assets/img/carousel-1.jpg";
 import img2 from "../assets/img/carousel-2.jpg";
 
-function HeaderCarousel() {
+function Carousel() {
   return (
     <>
       {/* Carousel Start */}
-      <div className="container-fluid px-0">
+      <div className="container-fluid px-0" style={{marginTop: "120px"}}>
         <div id="carouselId" className="carousel slide" data-bs-ride="carousel">
-          <ol className="carousel-indicators">
+          <ol className="carousel-indicators" style={{ listStyle: "none" }}>
             <li
               data-bs-target="#carouselId"
-              data-bs-slide-to={0}
+              data-bs-slide-to="0"
               className="active"
               aria-current="true"
               aria-label="First slide"
-            />
+            ></li>
             <li
               data-bs-target="#carouselId"
-              data-bs-slide-to={1}
+              data-bs-slide-to="1"
               aria-label="Second slide"
-            />
+            ></li>
           </ol>
           <div className="carousel-inner" role="listbox">
             <div className="carousel-item active">
@@ -28,15 +28,16 @@ function HeaderCarousel() {
               <div className="carousel-caption">
                 <div className="container carousel-content">
                   <h6 className="text-secondary-color h4 animated fadeInUp">
-                    Best IT Solutions
+                    Transforming Your Business Digitally
                   </h6>
                   <h1 className="text-white display-1 mb-4 animated fadeInRight fw-bold">
-                    An Innovative IT Solutions Agency
+                    Digital Solutions Leader
                   </h1>
                   <p className="mb-4 text-white fs-5 animated fadeInDown">
-                    Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut
-                    interdum. Pellentesque aliquam dolor eget urna ultricies
-                    tincidunt.
+                    Discover innovative digital solutions that propel your
+                    business forward. We specialize in cutting-edge technologies
+                    tailored to meet your unique needs. Let's revolutionize your
+                    digital presence together.
                   </p>
                   <a href="" className="me-2">
                     <button
@@ -62,15 +63,17 @@ function HeaderCarousel() {
               <div className="carousel-caption">
                 <div className="container carousel-content">
                   <h6 className="text-secondary-color h4 animated fadeInUp">
-                    Best IT Solutions
+                    Empower Your Brand with Us
                   </h6>
                   <h1 className="text-white display-1 mb-4 animated fadeInLeft fw-bold">
-                    Quality Digital Services You Really Need!
+                    Your Trusted Partner in Digital Success
                   </h1>
                   <p className="mb-4 text-white fs-5 animated fadeInDown">
-                    Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut
-                    interdum. Pellentesque aliquam dolor eget urna ultricies
-                    tincidunt.
+                    Unlock the potential of your brand with our comprehensive
+                    digital services. From strategic planning to flawless
+                    execution, we are committed to delivering excellence at
+                    every step. Join hands with us and embark on a journey of
+                    growth and success.
                   </p>
                   <a href="" className="me-2">
                     <button
@@ -118,4 +121,4 @@ function HeaderCarousel() {
   );
 }
 
-export default HeaderCarousel;
+export default Carousel;

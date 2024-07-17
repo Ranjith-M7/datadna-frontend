@@ -8,7 +8,7 @@ function About() {
         {/* Section Title */}
         <div className="container section-title" data-aos="fade-up">
           <h2>About</h2>
-          <p>Check Our Services</p>
+          <p>About Us</p>
         </div>
         {/* End Section Title */}
 
@@ -21,15 +21,14 @@ function About() {
             >
               <div className="content">
                 <h3>Who We Are</h3>
-                <h2>
-                  Expedita voluptas omnis cupiditate totam eveniet nobis sint
-                  iste. Dolores est repellat corrupti reprehenderit.
-                </h2>
+                <h2>Building Relationships Through Excellence</h2>
                 <p>
-                  Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt
-                  et. Inventore et et dolor consequatur itaque ut voluptate sed
-                  et. Magnam nam ipsum tenetur suscipit voluptatum nam et est
-                  corrupti.
+                  At DataDNA, we are dedicated to delivering unparalleled
+                  service and expertise to our clients. Our commitment to
+                  quality and innovation drives everything we do. We believe in
+                  forging lasting partnerships built on trust and mutual
+                  success. Explore our approach to business and discover how we
+                  can help you achieve your goals.
                 </p>
                 <div className="text-center text-lg-start">
                   <a

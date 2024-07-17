@@ -1,18 +1,14 @@
 import React from "react";
-import Topbar from "./Topbar";
-import Navbar from "./Navbar";
-import PageHeader from "./PageHeader";
+import Header from "./Header";
+
 import Contact from "./Contact";
 import Footer from "./Footer";
 import ScrollTop from "./ScrollTop";
 
 function ContactPage() {
-    const pageTitle = "Contact";
   return (
     <>
-      <Topbar />
-      <Navbar />
-      {/* <PageHeader pageTitle={pageTitle} /> */}
+      <Header />
       <Contact />
       <Footer />
       <ScrollTop />
@@ -20,4 +16,4 @@ function ContactPage() {
   );
 }
 
-export default ContactPage
+export default ContactPage;

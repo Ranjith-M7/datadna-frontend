@@ -15,6 +15,15 @@ import Swiper, { Navigation, Pagination } from "swiper";
 import ProjectsPage from "./components/ProjectsPage";
 import ContactPage from "./components/ContactPage";
 
+import LoginForm from "./components/signin";
+import SignUpForm from "./components/signup";
+import Blog from "./components/Blog";
+import BlogDetails from "./components/BlogDetails";
+import Profile from "./components/Profile";
+import AdminPage from "./components/AdminPage";
+import SeoPage from "./components/SeoPage";
+import BlogEdit from "./components/BlogEdit";
+
 function App() {
   useEffect(() => {
     // Initialize AOS
@@ -58,6 +67,15 @@ function App() {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/contact" element={<ContactPage />} />
+
+          {/* <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/blog-details/:title" element={<BlogDetails />} /> */}
+          <Route path="/signin" element={<LoginForm />} />
+          <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/seo-settings" element={<SeoPage />} />
+          <Route path="/adminpage" element={<AdminPage />} />
+          <Route path="/blogedit" element={<BlogEdit />} />
           <Route path="*" element={<HomePage />} />
         </Routes>
       </BrowserRouter>

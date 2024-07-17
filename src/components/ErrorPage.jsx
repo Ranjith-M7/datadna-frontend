@@ -1,34 +1,12 @@
 import React from "react";
-import Topbar from "./Topbar";
-import Navbar from "./Navbar";
+import Header from "./Header";
 
 import Footer from "./Footer";
 import ScrollTop from "./ScrollTop";
 function ErrorPage() {
   return (
     <>
-      <Topbar />
-      <Navbar />
-
-      {/* Page Header Start */}
-      <div className="container-fluid page-header py-5">
-        <div className="container text-center py-5">
-          <h1 className="display-2 text-white mb-4 animated slideInDown">
-            404 Error
-          </h1>
-          <nav aria-label="breadcrumb animated slideInDown">
-            <ol className="breadcrumb justify-content-center mb-0">
-              <li className="breadcrumb-item">
-                <a href="/">Home</a>
-              </li>
-              <li className="breadcrumb-item" aria-current="page">
-                404 Error
-              </li>
-            </ol>
-          </nav>
-        </div>
-      </div>
-      {/* Page Header End */}
+      <Header />
 
       {/* 404 Start */}
       <div

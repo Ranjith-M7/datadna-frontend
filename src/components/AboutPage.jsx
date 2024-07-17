@@ -1,18 +1,13 @@
 import React from "react";
-import Topbar from "./Topbar";
-import Navbar from "./Navbar";
-import PageHeader from "./PageHeader";
+import Header from "./Header";
 import About from "./About";
 import Footer from "./Footer";
 import ScrollTop from "./ScrollTop";
 
 function AboutPage() {
-  const pageTitle = "About Us";
   return (
     <>
-      <Topbar />
-      <Navbar />
-      {/* <PageHeader pageTitle={pageTitle} /> */}
+      <Header />
       <About />
       <Footer />
       <ScrollTop />
