@@ -95,7 +95,7 @@ function SeoPage() {
         <div className="container">
           <div className="row">
             <div className="col-lg-12 text-center">
-              <div className="section-heading">
+              <div className="section-title">
                 <h2 className="heading">Update Metadata</h2>
               </div>
             </div>
@@ -153,7 +153,7 @@ function SeoPage() {
                     />
                   </div>
                 </div>
-                <button type="submit" className="secondary-button">
+                <button type="submit" className="btn btn-secondary">
                   Update
                 </button>
               </form>

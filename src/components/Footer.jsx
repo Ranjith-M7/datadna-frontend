@@ -1,6 +1,70 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { database } from "./firebaseConfig";
 
 function Footer() {
+  const [footerData, setFooterData] = useState({
+    newsletter: {
+      title: "",
+      description: "",
+    },
+    brand: {
+      name: "",
+      url: "",
+    },
+    address: "",
+    phoneNumber: {
+      label: "",
+      number: "",
+    },
+    emailId: {
+      label: "",
+      email: "",
+    },
+    usefulLinks: {
+      title: "",
+      links: [],
+    },
+    ourServices: {
+      title: "",
+      services: [],
+    },
+    social: {
+      title: "",
+      description: "",
+      socialLinks: {
+        facebook: "",
+        instagram: "",
+        linkedin: "",
+        twitter: "",
+      },
+    },
+    credits: {
+      brand: {
+        name: "",
+        url: "",
+      },
+      copyrightText: "",
+      rightsText: "",
+    },
+  });
+
+  useEffect(() => {
+    const fetchFooterData = async () => {
+      try {
+        const snapshot = await database.ref("Footer Section").once("value");
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          setFooterData(data);
+        } else {
+          console.log("The footer data was not found in the database");
+        }
+      } catch (error) {
+        console.log(`Error: `, error);
+      }
+    };
+    fetchFooterData();
+  }, []);
+
   return (
     <>
       <footer id="footer" className="footer">
@@ -8,24 +72,12 @@ function Footer() {
           <div className="container">
             <div className="row justify-content-center text-center">
               <div className="col-lg-6">
-                <h4>Join Our Newsletter</h4>
-                <p>
-                  Subscribe to our newsletter and receive the latest news about
-                  our products and services!
-                </p>
-                <form
-                  action="forms/newsletter.php"
-                  method="post"
-                  className="php-email-form"
-                >
+                <h4>{footerData.newsletter.title}</h4>
+                <p>{footerData.newsletter.description}</p>
+                <form action="forms/newsletter.php" method="post" className="php-email-form">
                   <div className="newsletter-form">
-                    <input type="email" name="email" />
+                    <input type="email" name="email" placeholder="Your Email" />
                     <input type="submit" defaultValue="Subscribe" />
-                  </div>
-                  <div className="loading">Loading</div>
-                  <div className="error-message" />
-                  <div className="sent-message">
-                    Your subscription request has been sent. Thank you!
                   </div>
                 </form>
               </div>
@@ -35,76 +87,53 @@ function Footer() {
         <div className="container footer-top">
           <div className="row gy-4">
             <div className="col-lg-4 col-md-6 footer-about">
-              <a href="index.html" className="d-flex align-items-center">
-                <span className="sitename">DataDNA</span>
+              <a href={footerData.brand.url} className="d-flex align-items-center">
+                <span className="sitename fw-bold">{footerData.brand.name}</span>
               </a>
               <div className="footer-contact pt-3">
-                <p>A108 Adam Street</p>
-                <p>New York, NY 535022</p>
+                <p>{footerData.address}</p>
                 <p className="mt-3">
-                  <strong>Phone:</strong> <span>+1 5589 55488 55</span>
+                  <strong>{footerData.phoneNumber.label}:</strong> <span>{footerData.phoneNumber.number}</span>
                 </p>
                 <p>
-                  <strong>Email:</strong> <span>info@example.com</span>
+                  <strong>{footerData.emailId.label}:</strong> <span>{footerData.emailId.email}</span>
                 </p>
               </div>
             </div>
             <div className="col-lg-2 col-md-3 footer-links">
-              <h4>Useful Links</h4>
+              <h4>{footerData.usefulLinks.title}</h4>
               <ul>
-                <li>
-                  <i className="bi bi-chevron-right" /> <a href="#">Home</a>
-                </li>
-                <li>
-                  <i className="bi bi-chevron-right" /> <a href="#">About us</a>
-                </li>
-                <li>
-                  <i className="bi bi-chevron-right" /> <a href="#">Services</a>
-                </li>
-                <li>
-                  <i className="bi bi-chevron-right" />{" "}
-                  <a href="#">Terms of service</a>
-                </li>
+                {footerData.usefulLinks.links.map((link, index) => (
+                  <li key={index}>
+                    <i className="bi bi-chevron-right" /> <a href={link.url}>{link.name}</a>
+                  </li>
+                ))}
               </ul>
             </div>
             <div className="col-lg-2 col-md-3 footer-links">
-              <h4>Our Services</h4>
+              <h4>{footerData.ourServices.title}</h4>
               <ul>
-                <li>
-                  <i className="bi bi-chevron-right" />{" "}
-                  <a href="#">Web Design</a>
-                </li>
-                <li>
-                  <i className="bi bi-chevron-right" />{" "}
-                  <a href="#">Web Development</a>
-                </li>
-                <li>
-                  <i className="bi bi-chevron-right" />{" "}
-                  <a href="#">Product Management</a>
-                </li>
-                <li>
-                  <i className="bi bi-chevron-right" />{" "}
-                  <a href="#">Marketing</a>
-                </li>
+                {footerData.ourServices.services.map((service, index) => (
+                  <li key={index}>
+                    <i className="bi bi-chevron-right" /> <a href={service.url}>{service.name}</a>
+                  </li>
+                ))}
               </ul>
             </div>
             <div className="col-lg-4 col-md-12">
-              <h4>Follow Us</h4>
-              <p>
-                Cras fermentum odio eu feugiat lide par naso tierra videa magna
-                derita valies
-              </p>
+              <h4>{footerData.social.title}</h4>
+              <p>{footerData.social.description}</p>
               <div className="social-links d-flex">
-                <a href="">
-                  <i className="bi bi-twitter-x" />
+                <a href={footerData.social.socialLinks.twitter}>
+                  <i className="bi bi-twitter" />
                 </a>
-                <a href="">
+                <a href={footerData.social.socialLinks.facebook}>
                   <i className="bi bi-facebook" />
                 </a>
-                <a href="">
+                <a href={footerData.social.socialLinks.instagram}>
                   <i className="bi bi-instagram" />
                 </a>
-                <a href="">
+                <a href={footerData.social.socialLinks.linkedin}>
                   <i className="bi bi-linkedin" />
                 </a>
               </div>
@@ -112,12 +141,11 @@ function Footer() {
           </div>
         </div>
         <div className="container copyright text-center mt-4">
-          <p>
-            © <span>Copyright</span>{" "}
-            <strong className="px-1 sitename">DataDNA</strong>{" "}
-            <span>All Rights Reserved</span>
-          </p>
           <div className="credits">
+            <span>
+              {footerData.credits.copyrightText}{" "}
+              <a href={footerData.credits.brand.url}>{footerData.credits.brand.name}</a>. {footerData.credits.rightsText}
+            </span>
           </div>
         </div>
       </footer>

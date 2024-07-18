@@ -1,14 +1,82 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { database, storage } from "./firebaseConfig";
 
 function About() {
+  const [aboutImage, setAboutImage] = useState(null);
+  const [aboutData, setAboutData] = useState({
+    title: "",
+    subtitle: "",
+    content: {
+      title: "",
+      subtitle: "",
+      description: "",
+      button: {
+        text: "",
+        url: "",
+      },
+    },
+  });
+
+  // Fetch About image from firebase storage
+  useEffect(() => {
+    const fetchAboutImage = async () => {
+      try {
+        const listRef = storage.ref("About Image");
+        const result = await listRef.listAll();
+        const imageUrls = await Promise.all(
+          result.items.map(async (itemRef) => {
+            const imageUrl = await itemRef.getDownloadURL();
+            return imageUrl;
+          })
+        );
+        setAboutImage(imageUrls);
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    };
+
+    fetchAboutImage();
+  }, []);
+
+  // Fetch About date from firebase database
+  useEffect(() => {
+    const fetchAboutData = async () => {
+      try {
+        const snapshot = await database.ref("About Section").once("value");
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          const { title, subtitle, content } = data;
+          setAboutData({
+            title: title,
+            subtitle: subtitle,
+            content: {
+              title: content.title || "",
+              subtitle: content.subtitle || "",
+              description: content.description || "",
+              button: {
+                text: content.button.text || "",
+                url: content.button.url || "",
+              },
+            },
+          });
+        } else {
+          console.log("The about data was not found in the database");
+        }
+      } catch (error) {
+        console.log(`Error: `, error);
+      }
+    };
+    fetchAboutData();
+  }, []);
+
   return (
     <>
       {/* About Section */}
       <section id="about" className="about section">
         {/* Section Title */}
         <div className="container section-title" data-aos="fade-up">
-          <h2>About</h2>
-          <p>About Us</p>
+          <h2>{aboutData.title}</h2>
+          <p>{aboutData.subtitle}</p>
         </div>
         {/* End Section Title */}
 
@@ -20,22 +88,15 @@ function About() {
               data-aos-delay={200}
             >
               <div className="content">
-                <h3>Who We Are</h3>
-                <h2>Building Relationships Through Excellence</h2>
-                <p>
-                  At DataDNA, we are dedicated to delivering unparalleled
-                  service and expertise to our clients. Our commitment to
-                  quality and innovation drives everything we do. We believe in
-                  forging lasting partnerships built on trust and mutual
-                  success. Explore our approach to business and discover how we
-                  can help you achieve your goals.
-                </p>
+                <h3>{aboutData.content.title}</h3>
+                <h2>{aboutData.content.subtitle}</h2>
+                <p>{aboutData.content.description}</p>
                 <div className="text-center text-lg-start">
                   <a
-                    href="#"
+                    href={`${aboutData.content.button.url}`}
                     className="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center"
                   >
-                    <span>Read More</span>
+                    <span>{aboutData.content.button.text}</span>
                     <i className="bi bi-arrow-right" />
                   </a>
                 </div>
@@ -46,7 +107,7 @@ function About() {
               data-aos="zoom-out"
               data-aos-delay={200}
             >
-              <img src="assets/img/about.jpg" className="img-fluid" alt="" />
+              <img src={aboutImage} className="img-fluid" alt="" />
             </div>
           </div>
         </div>

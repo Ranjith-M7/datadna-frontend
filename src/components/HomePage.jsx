@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "./Header";
-import Carousel from "./Carousel";
 import About from "./About";
 import Stats from "./Stats";
 import Services from "./Services";
@@ -9,12 +8,13 @@ import Portfolio from "./Portfolio";
 import Contact from "./Contact";
 import Footer from "./Footer";
 import ScrollTop from "./ScrollTop";
+import MainCarousel from "./MainCarousel";
 
 function HomePage() {
   return (
     <>
       <Header />
-      <Carousel />
+      <MainCarousel />
       <Stats />
       <About />
       <Services />

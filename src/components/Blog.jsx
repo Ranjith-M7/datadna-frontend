@@ -62,14 +62,14 @@ function Blog() {
   return (
     <>
       <Header />
-      <section className="blog-section section" id="blog">
+      <section className="blog-section" id="blog">
         <div className="hero-wrap">
           <div className="container">
             <div className="row">
               <div className="col-lg-12 text-center">
-                <div className="section-heading">
-                  <h6>BLOG</h6>
-                  <h2>Our Stories</h2>
+                <div className="section-title">
+                  <h2>BLOG</h2>
+                  <p>Our Stories</p>
                 </div>
               </div>
             </div>

@@ -111,7 +111,7 @@ function Profile() {
           <div className="container">
             <div className="row">
               <div className="col-lg-12 text-center">
-                <div className="section-heading">
+                <div className="section-title">
                   <h2 className="heading">My Profile</h2>
                 </div>
               </div>
@@ -191,7 +191,7 @@ function Profile() {
                           checked={gender === "male"}
                           onChange={(e) => setGender(e.target.value)}
                         />
-                        <label htmlFor="male" className="radio-label">
+                        <label htmlFor="male" className="radio-label ms-2">
                           Male
                         </label>
                       </div>
@@ -204,7 +204,7 @@ function Profile() {
                           checked={gender === "female"}
                           onChange={(e) => setGender(e.target.value)}
                         />
-                        <label htmlFor="female" className="radio-label">
+                        <label htmlFor="female" className="radio-label ms-2">
                           Female
                         </label>
                       </div>
@@ -219,7 +219,7 @@ function Profile() {
                         onChange={(e) => setLocation(e.target.value)}
                       />
                     </div>
-                    <button type="submit" className="secondary-button">
+                    <button type="submit" className="btn btn-secondary">
                       Update Profile
                     </button>
                   </form>

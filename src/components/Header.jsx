@@ -32,6 +32,19 @@ function Header() {
     },
   });
 
+  const [navbarData, setNavbarData] = useState({
+    brand: {
+      name: "",
+    },
+    contactInfo: {
+      phoneText: "",
+      questionText: "",
+    },
+    searchIcon: {
+      path: "",
+    },
+  });
+
   // Fetch topbar data from firebase
   useEffect(() => {
     const fetchTopbarData = async () => {
@@ -73,6 +86,36 @@ function Header() {
     fetchTopbarData();
   }, []);
 
+  // Fetch navbar data from firebase
+  useEffect(() => {
+    const fetchNavbarData = async () => {
+      try {
+        const snapshot = await database.ref("navbar").once("value");
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          const { brand, contactInfo, searchIcon } = data;
+          setNavbarData({
+            brand: {
+              name: brand.name || "",
+            },
+            contactInfo: {
+              phoneText: contactInfo.phoneText || "",
+              questionText: contactInfo.questionText || "",
+            },
+            searchIcon: {
+              path: searchIcon.path || "",
+            },
+          });
+        } else {
+          console.log("The navbar data was not found in the database");
+        }
+      } catch (error) {
+        console.log(`Error: `, error);
+      }
+    };
+    fetchNavbarData();
+  }, []);
+
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -98,9 +141,9 @@ function Header() {
   };
   return (
     <>
-      <div className="fixed-top">
+      <div className="">
         {/* Topbar Start */}
-        <div className="container-fluid bg-dark py-2 d-none d-md-flex">
+        <div className="container-fluid bg-dark py-2 topbar">
           <div className="container">
             <div className="d-flex justify-content-between topbar">
               <div className="top-info">
@@ -155,8 +198,8 @@ function Header() {
           <div className="container">
             <nav className="navbar navbar-dark navbar-expand-lg py-0">
               <NavLink to="/" className="navbar-brand">
-                <h1 className="text-white fw-bold d-block title my-2">
-                  Data<span className="text-secondary-color">DNA</span>
+                <h1 className="text-white fw-bold d-block title my-2 text-secondary-color">
+                  {navbarData.brand.name}
                 </h1>
               </NavLink>
               <button
@@ -168,35 +211,35 @@ function Header() {
                 <span className="navbar-toggler-icon" />
               </button>
               <div
-                className="collapse navbar-collapse bg-transparent"
+                className="collapse navbar-collapse bg-transparent "
                 id="navbarCollapse"
               >
-                <div className="navbar-nav ms-auto mx-xl-auto p-0">
+                <div className="navbar-nav ms-auto mx-xl-auto p-0 text-center">
                   <NavLink
                     to="/"
                     exact
-                    activeclassname="active"
+                    activeClassName="active"
                     className="nav-item nav-link text-green"
                   >
                     Home
                   </NavLink>
                   <NavLink
                     to="/about"
-                    activeclassname="active"
+                    activeClassName="active"
                     className="nav-item nav-link"
                   >
                     About Us
                   </NavLink>
                   <NavLink
                     to="/services"
-                    activeclassname="active"
+                    activeClassName="active"
                     className="nav-item nav-link"
                   >
                     Services
                   </NavLink>
                   <NavLink
                     to="/projects"
-                    activeclassname="active"
+                    activeClassName="active"
                     className="nav-item nav-link"
                   >
                     Projects
@@ -223,19 +266,17 @@ function Header() {
                       </NavLink>
                     </div>
                   </div>
-
                   <NavLink
                     to="/contact"
-                    activeclassname="active"
+                    activeClassName="active"
                     className="nav-item nav-link"
                   >
                     Contact
                   </NavLink>
-
                   {isLoggedIn ? (
-                    <div className="dropdown d-flex justify-content-center align-content-center">
+                    <div className="dropdown nav-item pb-3 pb-lg-0 d-flex flex-column justify-conntent-center align-items-center">
                       <button
-                        className="btn  px-4 dropdown-toggle"
+                        className="btn px-4 dropdown-toggle nav-link"
                         type="button"
                         id="dropdownMenuButton"
                         data-bs-toggle="dropdown"
@@ -310,7 +351,7 @@ function Header() {
                     <NavLink
                       to="/signin"
                       className="nav-item nav-link"
-                      activeclassname="active"
+                      activeClassName="active"
                     >
                       Sign In
                     </NavLink>
@@ -341,13 +382,15 @@ function Header() {
                   </NavLink>
                 </div>
                 <div className="d-flex flex-column pe-4 border-end">
-                  <span className="text-white-50">Have any questions?</span>
+                  <span className="text-white-50">
+                    {navbarData.contactInfo.questionText}
+                  </span>
                   <span className="text-secondary-color">
-                    Call: + 0123 456 7890
+                    {navbarData.contactInfo.phoneText}
                   </span>
                 </div>
-                <div className="d-flex align-items-center justify-content-center ms-4 ">
-                  <NavLink to="#">
+                <div className="d-flex align-items-center justify-content-center ms-4">
+                  <NavLink to={navbarData.searchIcon.path}>
                     <i className="fa-solid fa-magnifying-glass text-white fa-2x"></i>
                   </NavLink>
                 </div>

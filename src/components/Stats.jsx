@@ -1,7 +1,71 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CountUp from "react-countup";
+import { database } from "./firebaseConfig";
 
 function Stats() {
+  const [statsData, setStatsData] = useState({
+    happyClients: {
+      text: "",
+      numbers: "",
+      icon: "",
+    },
+    hardWorkers: {
+      text: "",
+      numbers: "",
+      icon: "",
+    },
+    hoursOfSupport: {
+      text: "",
+      numbers: "",
+      icon: "",
+    },
+    projects: {
+      text: "",
+      numbers: "",
+      icon: "",
+    },
+  });
+  // Fetch stats data from firebase
+  useEffect(() => {
+    const fetchStatesData = async () => {
+      try {
+        const snapshot = await database.ref("stats").once("value");
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          const { happyClients, hardWorkers, hoursOfSupport, projects } = data;
+          setStatsData({
+            happyClients: {
+              icon: happyClients.icon || "",
+              numbers: happyClients.numbers || "",
+              text: happyClients.text || "",
+            },
+
+            hardWorkers: {
+              icon: hardWorkers.icon || "",
+              numbers: hardWorkers.numbers || "",
+              text: hardWorkers.text || "",
+            },
+            hoursOfSupport: {
+              icon: hoursOfSupport.icon || "",
+              numbers: hoursOfSupport.numbers || "",
+              text: hoursOfSupport.text || "",
+            },
+            projects: {
+              icon: projects.icon || "",
+              numbers: projects.numbers || "",
+              text: projects.text || "",
+            },
+          });
+        } else {
+          console.log("The stats data were not found in the database");
+        }
+      } catch (error) {
+        console.log(`Error: `, error);
+      }
+    };
+    fetchStatesData();
+  }, []);
+
   return (
     <>
       {/* Stats Section */}
@@ -10,15 +74,17 @@ function Stats() {
           <div className="row gy-4">
             <div className="col-lg-3 col-md-6">
               <div className="stats-item d-flex align-items-center w-100 h-100">
-                <i className="bi bi-emoji-smile color-blue flex-shrink-0" />
+                <i
+                  className={`${statsData.happyClients.icon} color-blue flex-shrink-0`}
+                />
                 <div>
                   <CountUp
                     start={0}
-                    end={232}
+                    end={statsData.happyClients.numbers}
                     duration={1}
                     className="purecounter"
                   />
-                  <p>Happy Clients</p>
+                  <p>{statsData.happyClients.text}</p>
                 </div>
               </div>
             </div>
@@ -26,17 +92,17 @@ function Stats() {
             <div className="col-lg-3 col-md-6">
               <div className="stats-item d-flex align-items-center w-100 h-100">
                 <i
-                  className="bi bi-journal-richtext color-orange flex-shrink-0"
+                  className={`${statsData.projects.icon} color-orange flex-shrink-0`}
                   style={{ color: "#ee6c20" }}
                 />
                 <div>
                   <CountUp
                     start={0}
-                    end={521}
+                    end={statsData.projects.numbers}
                     duration={1}
                     className="purecounter"
                   />
-                  <p>Projects</p>
+                  <p>{statsData.projects.text}</p>
                 </div>
               </div>
             </div>
@@ -44,17 +110,17 @@ function Stats() {
             <div className="col-lg-3 col-md-6">
               <div className="stats-item d-flex align-items-center w-100 h-100">
                 <i
-                  className="bi bi-headset color-green flex-shrink-0"
+                  className={`${statsData.hoursOfSupport.icon} color-green flex-shrink-0`}
                   style={{ color: "#15be56" }}
                 />
                 <div>
                   <CountUp
                     start={0}
-                    end={1463}
+                    end={statsData.hoursOfSupport.numbers}
                     duration={1}
                     className="purecounter"
                   />
-                  <p>Hours Of Support</p>
+                  <p>{statsData.hoursOfSupport.text}</p>
                 </div>
               </div>
             </div>
@@ -62,17 +128,17 @@ function Stats() {
             <div className="col-lg-3 col-md-6">
               <div className="stats-item d-flex align-items-center w-100 h-100">
                 <i
-                  className="bi bi-people color-pink flex-shrink-0"
+                  className={`${statsData.hardWorkers.icon} color-pink flex-shrink-0`}
                   style={{ color: "#bb0852" }}
                 />
                 <div>
                   <CountUp
                     start={0}
-                    end={15}
+                    end={statsData.hardWorkers.numbers}
                     duration={1}
                     className="purecounter"
                   />
-                  <p>Hard Workers</p>
+                  <p>{statsData.hardWorkers.text}</p>
                 </div>
               </div>
             </div>

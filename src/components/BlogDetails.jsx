@@ -503,60 +503,20 @@ const BlogDetails = () => {
   return (
     <>
       <Header />
-      <section className="hero-wrap section">
+      <div className="hero-wrap pt-5">
         <div className="container">
           <div className="row">
             <div className="col-lg-12 text-center">
-              <div className="section-heading">
-                <h6>BLOG</h6>
-                <h2>Blog Details</h2>
+              <div className="section-title">
+                <h2>BLOG</h2>
+                <p>Blog Details</p>
               </div>
             </div>
           </div>
         </div>
-      </section>
-      {/* <section className="ftco-section">
-        <div className="container">
-          <div className="row">
-            {post && (
-              <div className="col-md-12">
-                <div className="card mb-3">
-                  <img
-                    src={post.image}
-                    className="card-img-top"
-                    alt={post.title}
-                  />
-                  <div className="card-body">
-                    <div className="meta mb-2">
-                      <span className="mr-2">
-                        <i className="fa fa-calendar"></i>
-                        {post.date}
-                      </span>
-                      <span className="mr-2">
-                        <i className="fa fa-user"></i>
-                        {post.author}
-                      </span>
-                      <a href="#" className="meta-chat">
-                        <i className="fa fa-comments"></i>
-                        {post.comments} Comments
-                      </a>
-                    </div>
-                    <h5 className="card-title">
-                      <Link to={`/blog/blog-details/${post.title}`}>{post.title}</Link>
-                    </h5>
-                    <p
-                      className="card-text"
-                      dangerouslySetInnerHTML={{ __html: post.description }}
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </section> */}
-      {/*bootstrap code*/} <br></br>
-      <section className="blog-wrap">
+      </div>
+
+      <section className="blog-wrap blog-details">
         <div className="container">
           <div className="row">
             {post && (
@@ -565,7 +525,11 @@ const BlogDetails = () => {
                   <div className="row">
                     <div className="col-lg-12 mb-5">
                       <div className="single-blog-item">
-                        <img src={post.image} alt="" className="img-fluid" />
+                        <img
+                          src={post.image}
+                          alt=""
+                          className="img-fluid w-100"
+                        />
                         <div className="blog-item-content mt-5">
                           <div className="blog-item-meta mb-2 d-flex">
                             <div className="me-2 text-color-2 text-capitalize ">
@@ -691,7 +655,7 @@ const BlogDetails = () => {
                     </div>
                     <div className="col-lg-12">
                       <div className="comment-area mt-4 mb-5">
-                        <h4 className="mb-4">
+                        <h4 className="mb-4 fw-bold">
                           Comments on Healthy environment...{" "}
                         </h4>
                         <ul className="comment-tree list-unstyled">
@@ -747,7 +711,7 @@ const BlogDetails = () => {
                         id="comment-form"
                         onSubmit={handleSubmit}
                       >
-                        <h4 className="mb-4">Write a comment</h4>
+                        <h4 className="mb-4 fw-bold">Write a comment</h4>
                         <div className="row g-2">
                           <div className="col-md-6">
                             <div className="form-group">
@@ -793,22 +757,12 @@ const BlogDetails = () => {
                         </div>
 
                         <input
-                          className="btn btn-main-2 btn-round-full"
+                          className="btn btn-secondary btn-round-full"
                           type="submit"
                           name="submit-contact"
                           id="submit_contact"
                           defaultValue="Submit Message"
                         />
-                        {successMessage && (
-                          <div className="alert alert-success">
-                            {successMessage}
-                          </div>
-                        )}
-                        {errorMessage && (
-                          <div className="alert alert-danger">
-                            {errorMessage}
-                          </div>
-                        )}
                       </form>
                     </div>
                   </div>
@@ -827,7 +781,7 @@ const BlogDetails = () => {
             </form>
           </div>*/}
                     <div className="sidebar-widget latest-post mb-3">
-                      <h5>Popular Posts</h5>
+                      <h5 className="fw-bold">Popular Posts</h5>
                       {topPosts.map((post, index) => (
                         <>
                           <div key={index} className="py-2">
@@ -835,7 +789,7 @@ const BlogDetails = () => {
                               {post.date}
                             </span>
                             <h6 className="my-2">
-                              <Link 
+                              <Link
                                 to={`/blog/blog-details/${parseHTML(
                                   post.title
                                 )}`}
@@ -862,7 +816,7 @@ const BlogDetails = () => {
                       ))} */}
                     </div>
                     <div className="sidebar-widget category mb-3">
-                      <h5 className="mb-4">Categories</h5>
+                      <h5 className="mb-3 fw-bold">Categories</h5>
                       <ul className="list-unstyled">
                         {post &&
                           post.category &&
@@ -876,7 +830,7 @@ const BlogDetails = () => {
                       </ul>
                     </div>
                     <div className="sidebar-widget tags mb-3">
-                      <h5 className="mb-4">Tags</h5>
+                      <h5 className="mb-3 fw-bold">Tags</h5>
                       {post &&
                         post.tags &&
                         post.tags.map((tag, index) => (
@@ -897,8 +851,3 @@ const BlogDetails = () => {
   );
 };
 export default BlogDetails;
-
-
-
-
-

@@ -68,14 +68,16 @@ function App() {
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/contact" element={<ContactPage />} />
 
-          {/* <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/blog-details/:title" element={<BlogDetails />} /> */}
+          <Route path="/blogedit" element={<BlogEdit />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/blog-details/:title" element={<BlogDetails />} />
+          
           <Route path="/signin" element={<LoginForm />} />
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/seo-settings" element={<SeoPage />} />
           <Route path="/adminpage" element={<AdminPage />} />
-          <Route path="/blogedit" element={<BlogEdit />} />
+ 
           <Route path="*" element={<HomePage />} />
         </Routes>
       </BrowserRouter>
