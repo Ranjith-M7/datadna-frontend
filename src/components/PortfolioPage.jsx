@@ -1,18 +1,18 @@
 import React from "react";
 import Header from "./Header";
-import Projects from "./Projects";
+import Portfolio from "./Portfolio";
 import Footer from "./Footer";
 import ScrollTop from "./ScrollTop";
 
-function ProjectsPage() {
+function PortfolioPage() {
   return (
     <>
       <Header />
-      <Projects />
+      <Portfolio />
       <Footer />
       <ScrollTop />
     </>
   );
 }
 
-export default ProjectsPage;
+export default PortfolioPage;

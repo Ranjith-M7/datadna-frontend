@@ -255,6 +255,9 @@ function Header() {
                       <NavLink to="/blog" className="dropdown-item">
                         Our Blog
                       </NavLink>
+                      <NavLink to="/portfolio" className="dropdown-item">
+                        Portfolio
+                      </NavLink>
                       <NavLink to="/team" className="dropdown-item">
                         Our Team
                       </NavLink>
@@ -349,7 +352,7 @@ function Header() {
                     </div>
                   ) : (
                     <NavLink
-                      to="/signin"
+                      to="/auth"
                       className="nav-item nav-link"
                       activeClassName="active"
                     >

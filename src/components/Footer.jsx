@@ -125,7 +125,7 @@ function Footer() {
               <p>{footerData.social.description}</p>
               <div className="social-links d-flex">
                 <a href={footerData.social.socialLinks.twitter}>
-                  <i className="bi bi-twitter" />
+                  <i className="bi bi-twitter-x" />
                 </a>
                 <a href={footerData.social.socialLinks.facebook}>
                   <i className="bi bi-facebook" />

@@ -1,131 +1,100 @@
-import React, { useEffect } from "react";
-import img1 from "../assets/img/project-1.jpg";
-import img2 from "../assets/img/project-2.jpg";
-import img3 from "../assets/img/project-3.jpg";
-import img4 from "../assets/img/project-4.jpg";
-import img5 from "../assets/img/project-5.jpg";
-import img6 from "../assets/img/project-6.jpg";
+import React, { useState, useEffect } from "react";
+import { database, storage } from "./firebaseConfig";
 
 function Projects() {
+  const [projectsSectionData, setProjectsSectionData] = useState({
+    title: "",
+    desc: "",
+    projects: [],
+  });
+  const [dataloaded, setDataLoaded] = useState(false);
+
+  useEffect(() => {
+    const fetchProjectsSectionData = async () => {
+      try {
+        const snapshot = await database.ref("Projects Section").once("value");
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          const { title, subtitle, projects } = data;
+          const projectsArray = Object.values(projects);
+
+          const projectsWithImages = await Promise.all(
+            projectsArray.map(async (item) => {
+              const imagesRef = storage.ref(`Projects Images/${item.id}`);
+              const imagesSnapshot = await imagesRef.listAll();
+              const imagesUrls = await Promise.all(
+                imagesSnapshot.items.map(async (imageRef) => {
+                  const url = await imageRef.getDownloadURL();
+                  return url;
+                })
+              );
+
+              return {
+                ...item,
+                images: imagesUrls,
+              };
+            })
+          );
+
+          setProjectsSectionData({
+            title: title || "",
+            subtitle: subtitle || "",
+            projects: projectsWithImages || [],
+          });
+          setDataLoaded(true);
+        } else {
+          console.log(
+            "The projects section data was not found in the database"
+          );
+        }
+      } catch (error) {
+        console.log("Error", error);
+      }
+    };
+    fetchProjectsSectionData();
+  }, []);
+
   return (
     <>
-      {/* Project Start */}
       <div className="container-fluid project py-5 mb-5">
-        {/* Section Title */}
         <div className="container section-title" data-aos="fade-up">
-          <h2>Our Project</h2>
-          <p>Our Recently Completed Projects</p>
+          <h2>{projectsSectionData.title}</h2>
+          <p>{projectsSectionData.subtitle}</p>
         </div>
         <div className="container">
           <div className="row g-5">
-            <div
-              className="col-md-6 col-lg-4"
-              data-aos="fade-up"
-              data-aos-delay="300"
-            >
-              <div className="project-item">
-                <div className="project-img">
-                  <img src={img1} className="img-fluid w-100 rounded" alt="" />
-                  <div className="project-content">
-                    <a href="#" className="text-center">
-                      <h4 className="text-secondary-color">Web design</h4>
-                      <p className="m-0 text-white">Web Analysis</p>
-                    </a>
+            {dataloaded &&
+              projectsSectionData.projects.map((project, index) => (
+                <div
+                  key={project.id}
+                  className="col-md-6 col-lg-4"
+                  data-aos="fade-up"
+                  data-aos-delay={((index) % 3) * 200 + 300}
+                >
+                  <div className="project-item">
+                    <div className="project-img">
+                      <img
+                        src={project.images[0]}
+                        className="img-fluid w-100 rounded"
+                        alt={project.title}
+                      />
+                      <div className="project-content">
+                        <a href="#" className="text-center">
+                          <h4 className="text-secondary-color">
+                            {project.title}
+                          </h4>
+                          <p className="m-0 text-white">
+                            {project.category}
+                          </p>
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div
-              className="col-md-6 col-lg-4"
-              data-aos="fade-up"
-              data-aos-delay="500"
-            >
-              <div className="project-item">
-                <div className="project-img">
-                  <img src={img2} className="img-fluid w-100 rounded" alt="" />
-                  <div className="project-content">
-                    <a href="#" className="text-center">
-                      <h4 className="text-secondary-color">Cyber Security</h4>
-                      <p className="m-0 text-white">Cyber Security Core</p>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              className="col-md-6 col-lg-4"
-              data-aos="fade-up"
-              data-aos-delay="700"
-            >
-              <div className="project-item">
-                <div className="project-img">
-                  <img src={img3} className="img-fluid w-100 rounded" alt="" />
-                  <div className="project-content">
-                    <a href="#" className="text-center">
-                      <h4 className="text-secondary-color">Mobile Info</h4>
-                      <p className="m-0 text-white">Upcoming Phone</p>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              className="col-md-6 col-lg-4"
-              data-aos="fade-up"
-              data-aos-delay="300"
-            >
-              <div className="project-item">
-                <div className="project-img">
-                  <img src={img4} className="img-fluid w-100 rounded" alt="" />
-                  <div className="project-content">
-                    <a href="#" className="text-center">
-                      <h4 className="text-secondary-color">Web Development</h4>
-                      <p className="m-0 text-white">Web Analysis</p>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              className="col-md-6 col-lg-4"
-              data-aos="fade-up"
-              data-aos-delay="500"
-            >
-              <div className="project-item">
-                <div className="project-img">
-                  <img src={img5} className="img-fluid w-100 rounded" alt="" />
-                  <div className="project-content">
-                    <a href="#" className="text-center">
-                      <h4 className="text-secondary-color">
-                        Digital Marketing
-                      </h4>
-                      <p className="m-0 text-white">Marketing Analysis</p>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              className="col-md-6 col-lg-4"
-              data-aos="fade-up"
-              data-aos-delay="700"
-            >
-              <div className="project-item">
-                <div className="project-img">
-                  <img src={img6} className="img-fluid w-100 rounded" alt="" />
-                  <div className="project-content">
-                    <a href="#" className="text-center">
-                      <h4 className="text-secondary-color">Keyword Research</h4>
-                      <p className="m-0 text-white">Keyword Analysis</p>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+              ))}
           </div>
         </div>
       </div>
-      {/* Project End */}
     </>
   );
 }
