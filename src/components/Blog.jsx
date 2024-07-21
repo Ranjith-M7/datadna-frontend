@@ -77,7 +77,7 @@ function Blog() {
             </div>
           </div>
         </div>
-        <div className="container mt-2 mb-5">
+        <div className="container ">
           <div className="row justify-content-center">
             <div className="col-md-6">
               <div className="input-group">

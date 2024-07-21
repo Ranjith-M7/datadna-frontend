@@ -503,7 +503,7 @@ const BlogDetails = () => {
 
   return (
     <>
-     <Loader />
+      <Loader />
       <Header />
       <div className="hero-wrap pt-5">
         <div className="container">
@@ -518,7 +518,7 @@ const BlogDetails = () => {
         </div>
       </div>
 
-      <section className="blog-wrap blog-details">
+      <div className="blog-wrap blog-details">
         <div className="container">
           <div className="row">
             {post && (
@@ -847,7 +847,7 @@ const BlogDetails = () => {
             )}
           </div>
         </div>
-      </section>
+      </div>
       <Footer />
     </>
   );
