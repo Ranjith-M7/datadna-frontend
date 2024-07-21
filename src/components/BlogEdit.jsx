@@ -13,6 +13,7 @@ import Footer from "./Footer";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { post } from "jquery";
+import Loader from "./Loader";
 
 function BlogEdit() {
   //post blog
@@ -571,6 +572,7 @@ function BlogEdit() {
   };
   return (
     <>
+      <Loader />
       <Header />
 
       <section className="section" id="blog-edit">

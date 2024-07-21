@@ -165,7 +165,7 @@ const AuthForm = () => {
       <div className={`custom-container ${isSignUp ? "active" : ""}`}>
         <div className="custom-form-container custom-sign-up">
           <form>
-            <h2>Create Account</h2>
+            <h2 className="fw-bold">Create Account</h2>
             <div className="custom-social-icons">
               <a href="#" onClick={signInWithGoogle}>
                 <FaGoogle />
@@ -214,7 +214,7 @@ const AuthForm = () => {
         </div>
         <div className="custom-form-container custom-sign-in">
           <form>
-            <h2>Sign In</h2>
+            <h2 className="fw-bold">Sign In</h2>
             <div className="custom-social-icons">
               <a href="#" onClick={signInWithGoogle}>
                 <FaGoogle />
@@ -258,7 +258,7 @@ const AuthForm = () => {
                 isSignUp ? "custom-toggle-hidden" : ""
               }`}
             >
-              <h1>Welcome Back!</h1>
+              <h1 className="fw-bold text-white">Welcome Back!</h1>
               <p>
                 To keep connected with us please login with your personal info
               </p>
@@ -271,7 +271,7 @@ const AuthForm = () => {
                 isSignUp ? "" : "custom-toggle-hidden"
               }`}
             >
-              <h1>Hello, Friend!</h1>
+              <h1 className="fw-bold text-white">Hello, Friend!</h1>
               <p>Enter your personal details and start journey with us</p>
               <button className="hidden" onClick={toggleForm}>
                 Sign Up

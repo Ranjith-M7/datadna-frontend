@@ -1,8 +1,9 @@
+
+/* Auth style */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 .auth {
-    background-color: #c9d6ff;
-    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+    /* background: linear-gradient(to right, #fff, rgb(82, 50, 170, 0.2)); */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -212,4 +213,6 @@
 
 
 
-/* asdasd */
+
+  
+  

@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import Pagination from "react-js-pagination";
+import Loader from "./Loader";
 
 function Blog() {
   const [posts, setPosts] = useState([]);
@@ -61,6 +62,7 @@ function Blog() {
   };
   return (
     <>
+      <Loader />
       <Header />
       <section className="blog-section" id="blog">
         <div className="hero-wrap">

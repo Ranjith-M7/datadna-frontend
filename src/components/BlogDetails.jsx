@@ -10,6 +10,7 @@ import "icofont/dist/icofont.css";
 
 import Header from "./Header";
 import Footer from "./Footer";
+import Loader from "./Loader";
 
 const BlogDetails = () => {
   const [post, setPost] = useState(null);
@@ -502,6 +503,7 @@ const BlogDetails = () => {
 
   return (
     <>
+     <Loader />
       <Header />
       <div className="hero-wrap pt-5">
         <div className="container">
@@ -557,7 +559,7 @@ const BlogDetails = () => {
                               />
                             </button>
                           </div>
-                          <h2 className=" mt-2 mb-2 text-md">
+                          <h2 className=" mt-2 mb-2 text-md fw-bold">
                             <Link
                               // href="blog-single.html"
                               to={`/blog/blog-details/${parseHTML(post.title)}`}

@@ -141,7 +141,13 @@ function Header() {
   };
   return (
     <>
-      <div className="">
+      <div
+        style={{
+          position: "sticky",
+          top: "0",
+          zIndex: "100",
+        }}
+      >
         {/* Topbar Start */}
         <div className="container-fluid bg-dark py-2 topbar">
           <div className="container">

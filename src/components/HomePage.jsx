@@ -10,9 +10,12 @@ import Footer from "./Footer";
 import ScrollTop from "./ScrollTop";
 import MainCarousel from "./MainCarousel";
 
+import Loader from "./Loader";
+
 function HomePage() {
   return (
     <>
+      <Loader />
       <Header />
       <MainCarousel />
       <Stats />

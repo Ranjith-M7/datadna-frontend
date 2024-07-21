@@ -7,6 +7,7 @@ import Footer from "./Footer";
 
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "./Loader";
 
 function Profile() {
   const [firstName, setFirstName] = useState("");
@@ -104,6 +105,7 @@ function Profile() {
 
   return (
     <>
+     <Loader />
       <Header />
       {/* Profile details start */}
       <div>
