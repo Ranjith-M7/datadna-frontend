@@ -93,10 +93,10 @@ function Footer() {
               <div className="footer-contact pt-3">
                 <p>{footerData.address}</p>
                 <p className="mt-3">
-                  <strong>{footerData.phoneNumber.label}:</strong> <span>{footerData.phoneNumber.number}</span>
+                  <strong>{footerData.phoneNumber.label}</strong> <span>{footerData.phoneNumber.number}</span>
                 </p>
                 <p>
-                  <strong>{footerData.emailId.label}:</strong> <span>{footerData.emailId.email}</span>
+                  <strong>{footerData.emailId.label}</strong> <span>{footerData.emailId.email}</span>
                 </p>
               </div>
             </div>

@@ -8,39 +8,45 @@ function MainCarousel() {
   useEffect(() => {
     const fetchCarouselData = async () => {
       try {
-        const snapshot = await database.ref("Main Carousel").once("value");
-        if (snapshot.exists()) {
-          const data = snapshot.val();
-          // Convert object into an array
-          const carouselArray = Object.values(data);
-
-          // Fetch images for each carousel item
-          const carouselWithImages = await Promise.all(
-            carouselArray.map(async (item) => {
-              const imagesRef = storage.ref(`Main Carousel Images/${item.id}`);
-              const imagesSnapshot = await imagesRef.listAll();
-              const imagesUrls = await Promise.all(
-                imagesSnapshot.items.map(async (imageRef) => {
-                  const url = await imageRef.getDownloadURL();
-                  return url;
-                })
-              );
-
-              return {
-                ...item,
-                images: imagesUrls,
-              };
-            })
-          );
-
-          setCarouselData(carouselWithImages);
+        const localData = localStorage.getItem("carouselData");
+        if (localData && localData !== "undefined") {
+          setCarouselData(JSON.parse(localData));
           setDataLoaded(true);
-          // console.log("Loaded carousel data: ", carouselWithImages);
         } else {
-          console.log("The carousel data was not found in the database");
+          const snapshot = await database.ref("Main Carousel").once("value");
+          if (snapshot.exists()) {
+            const data = snapshot.val();
+            // Convert object into an array
+            const carouselArray = Object.values(data);
+
+            // Fetch images for each carousel item
+            const carouselWithImages = await Promise.all(
+              carouselArray.map(async (item) => {
+                const imagesRef = storage.ref(`Main Carousel Images/${item.id}`);
+                const imagesSnapshot = await imagesRef.listAll();
+                const imagesUrls = await Promise.all(
+                  imagesSnapshot.items.map(async (imageRef) => {
+                    const url = await imageRef.getDownloadURL();
+                    return url;
+                  })
+                );
+
+                return {
+                  ...item,
+                  images: imagesUrls,
+                };
+              })
+            );
+
+            setCarouselData(carouselWithImages);
+            setDataLoaded(true);
+            localStorage.setItem("carouselData", JSON.stringify(carouselWithImages));
+          } else {
+            console.log("The carousel data was not found in the database");
+          }
         }
       } catch (error) {
-        console.log("Error", error);
+        console.log("Error fetching carousel data:", error);
       }
     };
     fetchCarouselData();
@@ -76,7 +82,7 @@ function MainCarousel() {
                       key={imgIndex}
                       src={url}
                       className="img-fluid"
-                      alt={`Carousel ${item.Id} - Image ${imgIndex}`}
+                      alt={`Carousel ${item.id} - Image ${imgIndex}`}
                     />
                   ))}
                   <div className="carousel-caption">
