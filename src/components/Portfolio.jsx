@@ -13,7 +13,7 @@ import "aos/dist/aos.css";
 import "isotope-layout/dist/isotope.pkgd.min.js";
 import "glightbox/dist/css/glightbox.min.css";
 import GLightbox from "glightbox";
-import { database } from "./firebaseConfig"; // Adjust the path as necessary
+import { database } from "../firebase/firebaseConfig"; // Adjust the path as necessary
 
 function Portfolio() {
   const [portfolioData, setPortfolioData] = useState(null);
@@ -24,22 +24,21 @@ function Portfolio() {
   });
 
   useEffect(() => {
-    try {
-      const fetchSectionData = async () => {
+    const fetchSectionData = async () => {
+      try {
         const snapshot = await database.ref("Portfolio Section").once("value");
         if (snapshot.exists()) {
           const data = snapshot.val();
-          // console.log(data);
           setSectionData({
             title: data.title || "",
             subtitle: data.subtitle || "",
           });
         }
-      };
-      fetchSectionData();
-    } catch (error) {
-      console.log(error);
-    }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchSectionData();
   }, []);
 
   useEffect(() => {
@@ -67,26 +66,28 @@ function Portfolio() {
         }
       }
       setImageUrls(urls);
-
-      initializeIsotope();
     });
   }, []);
 
+  useEffect(() => {
+    if (portfolioData && Object.keys(imageUrls).length > 0) {
+      initializeIsotope();
+      GLightbox({
+        selector: ".glightbox",
+      });
+    }
+  }, [portfolioData, imageUrls]);
+
   const initializeIsotope = () => {
     AOS.init({ duration: 1000, once: true });
-    const lightbox = GLightbox({
-      selector: ".glightbox",
-    });
-
     const isotopeLayouts = document.querySelectorAll(".isotope-layout");
     isotopeLayouts.forEach((isotopeItem) => {
       let layout = isotopeItem.getAttribute("data-layout") ?? "masonry";
       let filter = isotopeItem.getAttribute("data-default-filter") ?? "*";
       let sort = isotopeItem.getAttribute("data-sort") ?? "original-order";
 
-      let initIsotope;
       imagesLoaded(isotopeItem.querySelector(".isotope-container"), () => {
-        initIsotope = new Isotope(
+        const initIsotope = new Isotope(
           isotopeItem.querySelector(".isotope-container"),
           {
             itemSelector: ".isotope-item",
@@ -95,24 +96,24 @@ function Portfolio() {
             sortBy: sort,
           }
         );
-      });
 
-      isotopeItem
-        .querySelectorAll(".isotope-filters li")
-        .forEach((filterElement) => {
-          filterElement.addEventListener("click", function () {
-            isotopeItem
-              .querySelector(".isotope-filters .filter-active")
-              .classList.remove("filter-active");
-            this.classList.add("filter-active");
-            initIsotope.arrange({
-              filter: this.getAttribute("data-filter"),
+        isotopeItem
+          .querySelectorAll(".isotope-filters li")
+          .forEach((filterElement) => {
+            filterElement.addEventListener("click", function () {
+              isotopeItem
+                .querySelector(".isotope-filters .filter-active")
+                .classList.remove("filter-active");
+              this.classList.add("filter-active");
+              initIsotope.arrange({
+                filter: this.getAttribute("data-filter"),
+              });
+              if (typeof AOS.refresh === "function") {
+                AOS.refresh();
+              }
             });
-            if (typeof AOS.refresh === "function") {
-              AOS.refresh();
-            }
           });
-        });
+      });
     });
   };
 

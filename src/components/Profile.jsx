@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-import { database, storage } from "./firebaseConfig";
+import { database, storage } from "../firebase/firebaseConfig";
 import Header from "./Header";
 import Footer from "./Footer";
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { database, storage } from "./firebaseConfig";
+import { database, storage } from "../firebase/firebaseConfig";
 
 function MainCarousel() {
   const [carouselData, setCarouselData] = useState([]);
@@ -8,42 +8,35 @@ function MainCarousel() {
   useEffect(() => {
     const fetchCarouselData = async () => {
       try {
-        const localData = localStorage.getItem("carouselData");
-        if (localData && localData !== "undefined") {
-          setCarouselData(JSON.parse(localData));
+        const snapshot = await database.ref("Main Carousel").once("value");
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          // Convert object into an array
+          const carouselArray = Object.values(data);
+
+          // Fetch images for each carousel item
+          const carouselWithImages = await Promise.all(
+            carouselArray.map(async (item) => {
+              const imagesRef = storage.ref(`Main Carousel Images/${item.id}`);
+              const imagesSnapshot = await imagesRef.listAll();
+              const imagesUrls = await Promise.all(
+                imagesSnapshot.items.map(async (imageRef) => {
+                  const url = await imageRef.getDownloadURL();
+                  return url;
+                })
+              );
+
+              return {
+                ...item,
+                images: imagesUrls,
+              };
+            })
+          );
+
+          setCarouselData(carouselWithImages);
           setDataLoaded(true);
         } else {
-          const snapshot = await database.ref("Main Carousel").once("value");
-          if (snapshot.exists()) {
-            const data = snapshot.val();
-            // Convert object into an array
-            const carouselArray = Object.values(data);
-
-            // Fetch images for each carousel item
-            const carouselWithImages = await Promise.all(
-              carouselArray.map(async (item) => {
-                const imagesRef = storage.ref(`Main Carousel Images/${item.id}`);
-                const imagesSnapshot = await imagesRef.listAll();
-                const imagesUrls = await Promise.all(
-                  imagesSnapshot.items.map(async (imageRef) => {
-                    const url = await imageRef.getDownloadURL();
-                    return url;
-                  })
-                );
-
-                return {
-                  ...item,
-                  images: imagesUrls,
-                };
-              })
-            );
-
-            setCarouselData(carouselWithImages);
-            setDataLoaded(true);
-            localStorage.setItem("carouselData", JSON.stringify(carouselWithImages));
-          } else {
-            console.log("The carousel data was not found in the database");
-          }
+          console.log("The carousel data was not found in the database");
         }
       } catch (error) {
         console.log("Error fetching carousel data:", error);
@@ -55,7 +48,7 @@ function MainCarousel() {
   return (
     <>
       {/* Carousel Start */}
-      <div className="container-fluid px-0 cc">
+      <div className="container-fluid px-0 main-carousel">
         {dataloaded && (
           <div
             id="carouselId"
@@ -76,7 +69,10 @@ function MainCarousel() {
             </ol>
             <div className="carousel-inner" role="listbox">
               {carouselData.map((item, index) => (
-                <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`}>
+                <div
+                  key={index}
+                  className={`carousel-item ${index === 0 ? "active" : ""}`}
+                >
                   {item.images.map((url, imgIndex) => (
                     <img
                       key={imgIndex}
@@ -121,7 +117,7 @@ function MainCarousel() {
                 data-bs-slide="prev"
               >
                 <span
-                  className="carousel-control-prev-icon"
+                  className="carousel-control-prev-ico"
                   aria-hidden="true"
                 />
                 <span className="visually-hidden">Previous</span>

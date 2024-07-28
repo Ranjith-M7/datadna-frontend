@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CountUp from "react-countup";
-import { database } from "./firebaseConfig";
+import { database } from "../firebase/firebaseConfig";
 
 function Stats() {
   const [statsData, setStatsData] = useState({

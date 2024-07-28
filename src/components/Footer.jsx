@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { database } from "./firebaseConfig";
+import { database } from "../firebase/firebaseConfig";
 
 function Footer() {
   const [footerData, setFooterData] = useState({
@@ -74,7 +74,11 @@ function Footer() {
               <div className="col-lg-6">
                 <h4>{footerData.newsletter.title}</h4>
                 <p>{footerData.newsletter.description}</p>
-                <form action="forms/newsletter.php" method="post" className="php-email-form">
+                <form
+                  action="forms/newsletter.php"
+                  method="post"
+                  className="php-email-form"
+                >
                   <div className="newsletter-form">
                     <input type="email" name="email" placeholder="Your Email" />
                     <input type="submit" defaultValue="Subscribe" />
@@ -86,44 +90,59 @@ function Footer() {
         </div>
         <div className="container footer-top">
           <div className="row gy-4">
-            <div className="col-lg-4 col-md-6 footer-about">
-              <a href={footerData.brand.url} className="d-flex align-items-center">
-                <span className="sitename fw-bold">{footerData.brand.name}</span>
+            <div className="col-lg-4 col-md-6 footer-about text-center text-md-start">
+              <a
+                href={footerData.brand.url}
+                className="d-flex align-items-center justify-content-center justify-content-md-start"
+              >
+                <span className="sitename fw-bold">
+                  {footerData.brand.name}
+                </span>
               </a>
               <div className="footer-contact pt-3">
                 <p>{footerData.address}</p>
                 <p className="mt-3">
-                  <strong>{footerData.phoneNumber.label}</strong> <span>{footerData.phoneNumber.number}</span>
+                  <strong>{footerData.phoneNumber.label}</strong>{" "}
+                  <span>{footerData.phoneNumber.number}</span>
                 </p>
                 <p>
-                  <strong>{footerData.emailId.label}</strong> <span>{footerData.emailId.email}</span>
+                  <strong>{footerData.emailId.label}</strong>{" "}
+                  <span>{footerData.emailId.email}</span>
                 </p>
               </div>
             </div>
-            <div className="col-lg-2 col-md-3 footer-links">
+            <div className="col-lg-2 col-md-3 footer-links text-center text-md-start">
               <h4>{footerData.usefulLinks.title}</h4>
               <ul>
                 {footerData.usefulLinks.links.map((link, index) => (
-                  <li key={index}>
-                    <i className="bi bi-chevron-right" /> <a href={link.url}>{link.name}</a>
+                  <li
+                    key={index}
+                    className="d-flex justify-content-center justify-content-md-start"
+                  >
+                    <i className="bi bi-chevron-right" />
+                    <a href={link.url}>{link.name}</a>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="col-lg-2 col-md-3 footer-links">
+            <div className="col-lg-2 col-md-3 footer-links text-center text-md-start">
               <h4>{footerData.ourServices.title}</h4>
               <ul>
                 {footerData.ourServices.services.map((service, index) => (
-                  <li key={index}>
-                    <i className="bi bi-chevron-right" /> <a href={service.url}>{service.name}</a>
+                  <li
+                    key={index}
+                    className="d-flex justify-content-center justify-content-md-start"
+                  >
+                    <i className="bi bi-chevron-right" />{" "}
+                    <a href={service.url}>{service.name}</a>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="col-lg-4 col-md-12">
+            <div className="col-lg-4 col-md-4 text-center text-md-start">
               <h4>{footerData.social.title}</h4>
               <p>{footerData.social.description}</p>
-              <div className="social-links d-flex">
+              <div className="social-links d-flex justify-content-center justify-content-md-start">
                 <a href={footerData.social.socialLinks.twitter}>
                   <i className="bi bi-twitter-x" />
                 </a>
@@ -144,7 +163,10 @@ function Footer() {
           <div className="credits">
             <span>
               {footerData.credits.copyrightText}{" "}
-              <a href={footerData.credits.brand.url}>{footerData.credits.brand.name}</a>. {footerData.credits.rightsText}
+              <a href={footerData.credits.brand.url}>
+                {footerData.credits.brand.name}
+              </a>
+              . {footerData.credits.rightsText}
             </span>
           </div>
         </div>

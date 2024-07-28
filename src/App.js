@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./components/HomePage";
 import AboutPage from "./components/AboutPage";
 import ServicesPage from "./components/ServicesPage";
-import ErrorPage from "./components/ErrorPage";
 
 import React, { useEffect } from "react";
 import AOS from "aos";
@@ -23,6 +22,8 @@ import SeoPage from "./components/SeoPage";
 import BlogEdit from "./components/BlogEdit";
 import PortfolioPage from "./components/PortfolioPage";
 import AuthForm from "./components/AuthForm";
+import TestimonialFilter from "./components/TestimonialFilter";
+import TestimonialPage from "./components/TestimonialPage";
 
 function App() {
   useEffect(() => {
@@ -68,7 +69,6 @@ function App() {
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="/contact" element={<ContactPage />} />
-
           <Route path="/blogedit" element={<BlogEdit />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/blog-details/:title" element={<BlogDetails />} />
@@ -76,8 +76,12 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/seo-settings" element={<SeoPage />} />
           <Route path="/adminpage" element={<AdminPage />} />
-
           <Route path="/auth" element={<AuthForm />} />
+          <Route path="/testimonial" element={<TestimonialPage />} />
+          <Route
+            path="/testimonial-filter"
+            element={<TestimonialFilter />}
+          ></Route>
 
           <Route path="*" element={<HomePage />} />
         </Routes>

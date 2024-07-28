@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import "firebase/compat/storage";
-import { storage } from "./firebaseConfig";
+import { storage } from "../firebase/firebaseConfig";
 import { Link } from "react-router-dom";
 import { Card, Form, Button, Container, Modal, Alert } from "react-bootstrap";
 import ReactQuill from "react-quill";

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
 function ScrollTop() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
-  const toggleVisibility = () => {
-    if (window.pageYOffset > 100) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  };
+  // const toggleVisibility = () => {
+  //   if (true) {
+  //     setIsVisible(true);
+  //   } else {
+  //     setIsVisible(false);
+  //   }
+  // };
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -18,12 +18,12 @@ function ScrollTop() {
     });
   };
 
-  useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility);
-    return () => {
-      window.removeEventListener('scroll', toggleVisibility);
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener('scroll', toggleVisibility);
+  //   return () => {
+  //     window.removeEventListener('scroll', toggleVisibility);
+  //   };
+  // }, []);
 
   return (
     <>

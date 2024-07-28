@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { database, storage } from "./firebaseConfig";
+import { database, storage } from "../firebase/firebaseConfig";
 
 function About() {
   const [aboutImage, setAboutImage] = useState(null);
@@ -16,6 +16,12 @@ function About() {
       },
     },
   });
+
+  // read more/ read less
+  const [isExpended, setIsExpended] = useState(false);
+  const handleToggle = () => {
+    setIsExpended(!isExpended);
+  };
 
   // Fetch About image from firebase storage
   useEffect(() => {
@@ -90,8 +96,26 @@ function About() {
               <div className="content">
                 <h3>{aboutData.content.title}</h3>
                 <h2>{aboutData.content.subtitle}</h2>
-                <p>{aboutData.content.description}</p>
-                <div className="text-center text-lg-start">
+                <p>
+                  {aboutData.content.description.substring(0, 200)}
+                  <span
+                    id="dots"
+                    style={{ display: isExpended ? "none" : "inline" }}
+                  >
+                    ...
+                  </span>
+                  <span
+                    id="more"
+                    style={{ display: isExpended ? "inline" : "none" }}
+                  >
+                    {aboutData.content.description.substring(200)}
+                  </span>
+                </p>
+                <a onClick={handleToggle} className="btn-read-more">
+                  {isExpended ? "Read less" : "Read more"}
+                </a>
+                {/* <p>{aboutData.content.description}</p> */}
+                {/* <div className="text-center text-lg-start">
                   <a
                     href={`${aboutData.content.button.url}`}
                     className="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center"
@@ -99,7 +123,7 @@ function About() {
                     <span>{aboutData.content.button.text}</span>
                     <i className="bi bi-arrow-right" />
                   </a>
-                </div>
+                </div> */}
               </div>
             </div>
             <div

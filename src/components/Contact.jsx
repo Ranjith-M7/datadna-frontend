@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { database } from "./firebaseConfig";
+import { database } from "../firebase/firebaseConfig";
 
-function Contact() {
+function Contact({ mapIsVisible }) {
   const [contactData, setContactData] = useState({
     title: "",
     subtitle: "",
@@ -244,16 +244,18 @@ function Contact() {
               </form>
             </div>
             <div className="col-lg-12">
-              <iframe
-                className="position-relative rounded shadow"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.6428960658045!2d80.21951977483833!3d12.80167628749832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52510b7ea14dbd%3A0x49b38c5db4767675!2sDataDNA!5e0!3m2!1sen!2sin!4v1715751776232!5m2!1sen!2sin"
-                width="100%"
-                height="400"
-                style={{ border: 0 }}
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              ></iframe>
+              {mapIsVisible && (
+                <iframe
+                  className="position-relative rounded shadow"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.6428960658045!2d80.21951977483833!3d12.80167628749832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52510b7ea14dbd%3A0x49b38c5db4767675!2sDataDNA!5e0!3m2!1sen!2sin!4v1715751776232!5m2!1sen!2sin"
+                  width="100%"
+                  height="400"
+                  style={{ border: 0 }}
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+              )}
             </div>
 
             {/* End Contact Form */}

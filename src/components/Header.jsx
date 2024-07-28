@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { database } from "./firebaseConfig";
+import { database } from "../firebase/firebaseConfig";
 import { NavLink, useNavigate } from "react-router-dom";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
@@ -270,9 +270,9 @@ function Header() {
                       <NavLink to="/testimonial" className="dropdown-item">
                         Testimonial
                       </NavLink>
-                      <NavLink to="/404" className="dropdown-item">
+                      {/*   <NavLink to="/404" className="dropdown-item">
                         404 Page
-                      </NavLink>
+                      </NavLink> */}
                     </div>
                   </div>
                   <NavLink
@@ -319,15 +319,6 @@ function Header() {
                         </li>
                         <li>
                           <NavLink
-                            to="/seo-settings"
-                            className="dropdown-item"
-                            activeClassName="active"
-                          >
-                            SEO Settings
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
                             to="/adminpage"
                             className="dropdown-item"
                             activeClassName="active"
@@ -337,11 +328,30 @@ function Header() {
                         </li>
                         <li>
                           <NavLink
+                            to="/seo-settings"
+                            className="dropdown-item"
+                            activeClassName="active"
+                          >
+                            SEO Settings
+                          </NavLink>
+                        </li>
+
+                        <li>
+                          <NavLink
                             to="/blogedit"
                             className="dropdown-item"
                             activeClassName="active"
                           >
-                            Blog Edit
+                            Blog
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink
+                            to="/testimonial-filter"
+                            className="dropdown-item"
+                            activeClassName="active"
+                          >
+                            Google Review
                           </NavLink>
                         </li>
                         <li>
@@ -390,7 +400,7 @@ function Header() {
                     </div>
                   </NavLink>
                 </div>
-                <div className="d-flex flex-column pe-4 border-end">
+                <div className="d-flex flex-column pe-4">
                   <span className="text-white-50">
                     {navbarData.contactInfo.questionText}
                   </span>
@@ -398,11 +408,11 @@ function Header() {
                     {navbarData.contactInfo.phoneText}
                   </span>
                 </div>
-                <div className="d-flex align-items-center justify-content-center ms-4">
+                {/* <div className="d-flex align-items-center justify-content-center ms-4">
                   <NavLink to={navbarData.searchIcon.path}>
                     <i className="fa-solid fa-magnifying-glass text-white fa-2x"></i>
                   </NavLink>
-                </div>
+                </div> */}
               </div>
             </nav>
           </div>

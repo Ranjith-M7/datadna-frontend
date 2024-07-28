@@ -11,7 +11,7 @@ function ContactPage() {
     <>
       <Loader />
       <Header />
-      <Contact />
+      <Contact isVisible={true} />
       <Footer />
       <ScrollTop />
     </>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { database, storage } from "./firebaseConfig";
+import { database, storage } from "../firebase/firebaseConfig";
 
 function Services() {
   const [servicesData, setServicesData] = useState({

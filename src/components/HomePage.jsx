@@ -23,7 +23,7 @@ function HomePage() {
       <Services />
       <Projects />
       <Portfolio />
-      <Contact />
+      <Contact mapIsVisible={false} />
       <Footer />
       <ScrollTop />
     </>
